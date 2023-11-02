@@ -1,0 +1,30 @@
+.body {
+  display: flex;
+  justify-content: center;
+  background: rgb(189, 189, 189);
+  background: linear-gradient(
+      90deg,
+      var(--a-bg-subtle) 0%,
+      var(--a-bg-subtle) 49%,
+      var(--a-bg-default) 50%,
+      var(--a-bg-default) 100%
+  );
+  min-width: min-content;
+}
+
+.container {
+  --padding: 2rem;
+  min-height: 100vh;
+}
+
+.sideBar {
+  padding: var(--padding);
+  background: var(--a-bg-subtle);
+}
+
+.mainContent {
+  padding: var(--padding);
+  background: var(--a-bg-default);
+  max-width: calc(75ch + 2 * var(--padding));
+  min-width: calc(40ch + 2 * var(--padding));
+}
