@@ -1,14 +1,22 @@
 import fs from "fs"
 import path from "path"
 
-const BASE_DIR = path.join(__dirname, "../app")
+function getBasePath() {
+  const rootDir = "dp-iverksett"
+  let pathComponents = __dirname.split("/")
+  while (pathComponents[pathComponents.length - 1] !== rootDir) {
+    pathComponents = pathComponents.slice(0, pathComponents.length - 1)
+  }
+  return pathComponents.concat("app").join("/")
+}
 
 export type DirectoryStructure = {
   [directoryName: string]: DirectoryStructure
 }
 
 export function buildDirectoryStructure(
-  ignore: string[] = ["favicon.ico"],
+  basePath: string = getBasePath(),
+  ignore: string[] = [],
 ): DirectoryStructure {
   function traverseDir(currentDir: string): DirectoryStructure {
     const files: string[] = fs.readdirSync(currentDir)
@@ -28,5 +36,5 @@ export function buildDirectoryStructure(
     }, {})
   }
 
-  return traverseDir(BASE_DIR)
+  return traverseDir(basePath)
 }

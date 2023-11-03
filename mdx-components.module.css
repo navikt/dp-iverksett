@@ -1,0 +1,15 @@
+.blockXs {
+  margin-bottom: var(--a-spacing-2);
+}
+
+.blockS {
+  margin-bottom: var(--a-spacing-4);
+}
+
+.blockM {
+  margin-bottom: var(--a-spacing-8);
+}
+
+.blockL {
+  margin-bottom: var(--a-spacing-16);
+}
