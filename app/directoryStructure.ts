@@ -1,17 +1,15 @@
 import fs from "fs"
 import path from "path"
 
-declare module global {
-  let appRoot: string
-}
-
-const BASE_DIR = `${global.appRoot}/app`
+const BASE_DIR = path.join(__dirname, "../app")
 
 export type DirectoryStructure = {
   [directoryName: string]: DirectoryStructure
 }
 
-export function buildDirectoryStructure(): DirectoryStructure {
+export function buildDirectoryStructure(
+  ignore: string[] = ["favicon.ico"],
+): DirectoryStructure {
   function traverseDir(currentDir: string): DirectoryStructure {
     const files: string[] = fs.readdirSync(currentDir)
 
@@ -21,7 +19,9 @@ export function buildDirectoryStructure(): DirectoryStructure {
 
       if (isDirectory) {
         const directoryName: string = path.basename(filePath)
-        structure[directoryName] = traverseDir(filePath)
+        if (!ignore.includes(directoryName)) {
+          structure[directoryName] = traverseDir(filePath)
+        }
       }
 
       return structure

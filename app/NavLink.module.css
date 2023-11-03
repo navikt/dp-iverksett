@@ -1,4 +1,11 @@
 .link {
   text-decoration: none;
   color: var(--a-text-subtle);
+  padding: 0.5rem 1rem 0.5rem 0.75rem;
+  width: 100%;
+  border-radius: var(--a-border-radius-medium);
+}
+
+.link:hover {
+  background: var(--a-bg-subtle);
 }

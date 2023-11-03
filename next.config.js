@@ -4,8 +4,9 @@ const withMDX = require("@next/mdx")()
 const nextConfig = {
   output: "export",
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
+  experimental: {
+    webpackBuildWorker: true,
+  },
 }
-
-global.appRoot = require("path").resolve(__dirname)
 
 module.exports = withMDX(nextConfig)

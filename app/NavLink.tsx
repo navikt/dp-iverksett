@@ -15,7 +15,7 @@ type Props = {
 
 export function NavLink({ name, subDirectories, href }: Props) {
   return (
-    <li key={name}>
+    <li key={name} className={styles.listItem}>
       <Link href={href} className={styles.link}>
         <BodyShort>{formaterNavn(name)}</BodyShort>
       </Link>
