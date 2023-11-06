@@ -3,7 +3,8 @@ import Link from "next/link"
 import Image from "next/image"
 import { Source_Sans_3 } from "next/font/google"
 import clsx from "clsx"
-import { BodyShort, HGrid } from "@navikt/ds-react"
+import { BodyShort, HGrid, HStack } from "@navikt/ds-react"
+import { GithubIcon } from "@/components/GithubIcon"
 import { Nav } from "@/components/Nav"
 import "./globals.css"
 
@@ -29,12 +30,17 @@ export default function RootLayout({ children }: Props) {
     <html lang="en">
       <body className={clsx(sourceSans.className, styles.body)}>
         <header className={styles.header}>
-          <Image src={navLogo.src} alt="" width="64" height="20" />
-          <span className={styles.headerDivider} />
-          <Link href="/" className={styles.headerLink}>
-            <BodyShort weight="semibold" size="large">
-              DP-Iverksett
-            </BodyShort>
+          <HStack gap="6" align="center">
+            <Image src={navLogo.src} alt="" width="64" height="20" />
+            <span className={styles.headerDivider} />
+            <Link href="/" className={styles.headerLink}>
+              <BodyShort weight="semibold" size="large">
+                DP-Iverksett
+              </BodyShort>
+            </Link>
+          </HStack>
+          <Link href="https://github.com/navikt/dp-iverksett" target="_blank">
+            <GithubIcon />
           </Link>
         </header>
         <HGrid columns="max-content auto" className={styles.container}>

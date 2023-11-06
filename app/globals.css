@@ -37,7 +37,7 @@ p, h1, h2, h3, h4, h5, h6 {
     --a-text-default: var(--a-text-on-inverted);
     --a-bg-default: #111;
     --a-bg-subtle: #222;
-    --a-text-action: var(--a-blue-400);
+    --a-text-action: var(--a-blue-300);
     --a-border-default: var(--a-gray-700);
     --a-surface-neutral-subtle-hover: var(--a-bg-subtle);
   }

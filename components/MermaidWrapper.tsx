@@ -20,7 +20,9 @@ type Props = {
 }
 
 export function MermaidWrapper({ chart }: Props) {
-  useEffect(() => mermaid.contentLoaded(), [])
+  useEffect(() => {
+    mermaid.contentLoaded()
+  }, [])
 
   return <div className="mermaid">{chart}</div>
 }

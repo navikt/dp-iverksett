@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fca8d8ab-969c-4bd6-ba78-5645c259aed9" name="Changes" comment="Støtt dark-mode">
-      <change afterPath="$PROJECT_DIR$/app/not-found.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/not-found.tsx" afterDir="false" />
+    <list default="true" id="fca8d8ab-969c-4bd6-ba78-5645c259aed9" name="Changes" comment="Stylingfikser">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/page.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/MermaidWrapper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/MermaidWrapper.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,13 +18,18 @@
       <list>
         <option value="TypeScript File" />
         <option value="CSS File" />
-        <option value="TypeScript JSX File" />
         <option value="CSS Module File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/node_modules/mermaid/dist/config.type.d.ts" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/node_modules/mermaid/dist/mermaid.d.ts" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/node_modules/mermaid/dist/mermaidAPI.d.ts" root0="SKIP_INSPECTION" />
   </component>
   <component name="KubernetesApiProvider"><![CDATA[{
   "isMigrated": true
@@ -50,7 +53,7 @@
     "git-widget-placeholder": "docs",
     "javascript.nodejs.core.library.configured.version": "19.7.0",
     "javascript.nodejs.core.library.typings.version": "20.8.10",
-    "last_opened_file_path": "/Users/stephen/Developer/dp-iverksett/app/utvikling/test/test",
+    "last_opened_file_path": "/Users/stephen/Developer/dp-iverksett/public",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -70,10 +73,10 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public" />
       <recent name="$PROJECT_DIR$/app/utvikling/test/test" />
       <recent name="$PROJECT_DIR$/app/utvikling/test" />
       <recent name="$PROJECT_DIR$/app/utvikling" />
-      <recent name="$PROJECT_DIR$/public" />
       <recent name="$PROJECT_DIR$/app" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -140,7 +143,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1698934246135</updated>
-      <workItem from="1698934247234" duration="39344000" />
+      <workItem from="1698934247234" duration="41161000" />
     </task>
     <task id="LOCAL-00001" summary="Opprett nextjs-prosjekt">
       <option name="closed" value="true" />
@@ -286,7 +289,23 @@
       <option name="project" value="LOCAL" />
       <updated>1699279563061</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Custom 404-side">
+      <option name="closed" value="true" />
+      <created>1699280495563</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1699280495563</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Stylingfikser">
+      <option name="closed" value="true" />
+      <created>1699291146139</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1699291146139</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -319,7 +338,9 @@
     <MESSAGE value="Ikke bruk jekyll&#10;&#10;&#10;Co-authored-by: Martine Enger &lt;marenger@student.matnat.uio.no&gt;" />
     <MESSAGE value="Tillat nøsting i nav-menyen" />
     <MESSAGE value="Støtt dark-mode" />
-    <option name="LAST_COMMIT_MESSAGE" value="Støtt dark-mode" />
+    <MESSAGE value="Custom 404-side" />
+    <MESSAGE value="Stylingfikser" />
+    <option name="LAST_COMMIT_MESSAGE" value="Stylingfikser" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
