@@ -1,4 +1,5 @@
-import { BodyShort, Link } from "@navikt/ds-react"
+import { BodyShort, Link as NavLenke } from "@navikt/ds-react"
+import Link from "next/link"
 import { DirectoryStructure } from "@/app/directoryStructure"
 
 import styles from "./NavLink.module.css"
@@ -16,8 +17,10 @@ type Props = {
 export function NavLink({ name, subDirectories, href }: Props) {
   return (
     <li key={name} className={styles.listItem}>
-      <Link href={href} className={styles.link}>
-        <BodyShort>{formaterNavn(name)}</BodyShort>
+      <Link href={href} legacyBehavior>
+        <NavLenke className={styles.link}>
+          <BodyShort>{formaterNavn(name)}</BodyShort>
+        </NavLenke>
       </Link>
       {Object.keys(subDirectories).length > 0 && (
         <ul>

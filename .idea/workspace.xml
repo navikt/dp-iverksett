@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fca8d8ab-969c-4bd6-ba78-5645c259aed9" name="Changes" comment="Bygg og deploy til github pages">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/build-and-deploy.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/build-and-deploy.yml" afterDir="false" />
+    <list default="true" id="fca8d8ab-969c-4bd6-ba78-5645c259aed9" name="Changes" comment="Bygg gh-pages ved push til docs">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/NavLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/NavLink.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +48,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "gh-pages",
+    "git-widget-placeholder": "docs",
     "javascript.nodejs.core.library.configured.version": "19.7.0",
     "javascript.nodejs.core.library.typings.version": "20.8.10",
     "last_opened_file_path": "/Users/stephen/Developer/dp-iverksett/app",
@@ -76,10 +79,10 @@
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
+      <command value="next export" />
+      <command value="npm run build" />
       <command value="npm run start" />
       <command value="npm run dev" />
-      <command value="npm run build" />
-      <command value="next export" />
     </option>
   </component>
   <component name="RunManager">
@@ -115,9 +118,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
+        <item itemvalue="npm.build" />
       </list>
     </recent_temporary>
   </component>
@@ -133,7 +136,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1698934246135</updated>
-      <workItem from="1698934247234" duration="28980000" />
+      <workItem from="1698934247234" duration="31481000" />
     </task>
     <task id="LOCAL-00001" summary="Opprett nextjs-prosjekt">
       <option name="closed" value="true" />
@@ -199,11 +202,62 @@
       <option name="project" value="LOCAL" />
       <updated>1699269780412</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Sett token eksplisitt">
+      <option name="closed" value="true" />
+      <created>1699270027994</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1699270027994</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Gi skrivetilgang til gh-pages workflow">
+      <option name="closed" value="true" />
+      <created>1699270326803</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1699270326803</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Sett assetprefix eksplisitt">
+      <option name="closed" value="true" />
+      <created>1699271111556</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1699271111556</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Sett assetprefix eksplisitt">
+      <option name="closed" value="true" />
+      <created>1699271362636</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1699271362636</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Bygg gh-pages ved push til docs">
+      <option name="closed" value="true" />
+      <created>1699271449522</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1699271449522</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Opprett nextjs-prosjekt" />
@@ -212,7 +266,11 @@
     <MESSAGE value="Bytt til nav-favicon" />
     <MESSAGE value="Legg til støtte for å generere table of contents" />
     <MESSAGE value="Bygg og deploy til github pages" />
-    <option name="LAST_COMMIT_MESSAGE" value="Bygg og deploy til github pages" />
+    <MESSAGE value="Sett token eksplisitt" />
+    <MESSAGE value="Gi skrivetilgang til gh-pages workflow" />
+    <MESSAGE value="Sett assetprefix eksplisitt" />
+    <MESSAGE value="Bygg gh-pages ved push til docs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bygg gh-pages ved push til docs" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
