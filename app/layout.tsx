@@ -7,7 +7,6 @@ import { Nav } from "@/app/Nav"
 import "./globals.css"
 
 import styles from "./layout.module.css"
-import Script from "next/script"
 
 const sourceSans = Source_Sans_3({
   subsets: ["latin"],
@@ -15,8 +14,8 @@ const sourceSans = Source_Sans_3({
 })
 
 export const metadata: Metadata = {
-  title: "dp-iverksett",
-  description: "Dokumentasjonsside for dp-iverksett",
+  title: "DP-Iverksett",
+  description: "Dokumentasjonsside for DP-Iverksett",
 }
 
 type Props = {

@@ -4,14 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fca8d8ab-969c-4bd6-ba78-5645c259aed9" name="Changes" comment="Fiks generering av mappestruktur&#10;&#10;- Legg til støtte for mermaid-diagrammer">
-      <change afterPath="$PROJECT_DIR$/app/MermaidWrapper.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="fca8d8ab-969c-4bd6-ba78-5645c259aed9" name="Changes" comment="Bytt til nav-favicon">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/directoryStructure.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/directoryStructure.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/layout.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/page.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/om_tjenesten/layout.module.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/om_tjenesten/layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/utvikling/layout.module.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/utvikling/layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/utvikling/page.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/app/utvikling/page.mdx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mdx-components.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/mdx-components.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
@@ -27,8 +28,8 @@
       <list>
         <option value="TypeScript File" />
         <option value="CSS File" />
-        <option value="CSS Module File" />
         <option value="TypeScript JSX File" />
+        <option value="CSS Module File" />
       </list>
     </option>
   </component>
@@ -82,9 +83,9 @@
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
-      <command value="npm run dev" />
       <command value="npm run start" />
       <command value="npm run build" />
+      <command value="npm run dev" />
     </option>
   </component>
   <component name="RunManager">
@@ -138,7 +139,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1698934246135</updated>
-      <workItem from="1698934247234" duration="22841000" />
+      <workItem from="1698934247234" duration="28130000" />
     </task>
     <task id="LOCAL-00001" summary="Opprett nextjs-prosjekt">
       <option name="closed" value="true" />
@@ -172,7 +173,23 @@
       <option name="project" value="LOCAL" />
       <updated>1699016084413</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Fiks generering av mappestruktur&#10;&#10;- Legg til støtte for mermaid-diagrammer">
+      <option name="closed" value="true" />
+      <created>1699186519413</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1699186519413</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Bytt til nav-favicon">
+      <option name="closed" value="true" />
+      <created>1699269096849</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1699269096849</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -182,7 +199,8 @@
     <MESSAGE value="Opprett nextjs-prosjekt" />
     <MESSAGE value="Diverse styling&#10;&#10;- Fiks preloading av fonts for å slippe css-flash" />
     <MESSAGE value="Fiks generering av mappestruktur&#10;&#10;- Legg til støtte for mermaid-diagrammer" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fiks generering av mappestruktur&#10;&#10;- Legg til støtte for mermaid-diagrammer" />
+    <MESSAGE value="Bytt til nav-favicon" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bytt til nav-favicon" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

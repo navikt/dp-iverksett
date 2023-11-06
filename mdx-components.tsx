@@ -10,18 +10,23 @@ const MermaidWrapper = dynamic(() => import("@/app/MermaidWrapper"), {
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
-    h1: ({ children }) => (
-      <Heading level="1" size="large" className={styles.blockM}>
+    h1: ({ children, ...rest }) => (
+      <Heading
+        level="1"
+        size="large"
+        className={styles.blockM}
+        {...(rest as any)}
+      >
         {children}
       </Heading>
     ),
-    h2: ({ children }) => (
-      <Heading level="2" size="large">
+    h2: ({ children, ...rest }) => (
+      <Heading level="2" size="medium" {...(rest as any)}>
         {children}
       </Heading>
     ),
-    h3: ({ children }) => (
-      <Heading level="3" size="large">
+    h3: ({ children, ...rest }) => (
+      <Heading level="3" size="small" {...(rest as any)}>
         {children}
       </Heading>
     ),
