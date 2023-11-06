@@ -4,24 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fca8d8ab-969c-4bd6-ba78-5645c259aed9" name="Changes" comment="Ikke bruk jekyll&#10;&#10;&#10;Co-authored-by: Martine Enger &lt;marenger@student.matnat.uio.no&gt;">
-      <change afterPath="$PROJECT_DIR$/app/for_konsumenter/page.mdx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/utvikling/test/test/page.mdx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/ExpandableNavLink.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/ExpandableNavLink.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/MenuLink.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/nav-logo-red.svg" afterDir="false" />
+    <list default="true" id="fca8d8ab-969c-4bd6-ba78-5645c259aed9" name="Changes" comment="Støtt dark-mode">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.nojekyll" beforeDir="false" afterPath="$PROJECT_DIR$/app/utvikling/test/page.mdx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/MermaidWrapper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/MermaidWrapper.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Nav.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/components/Nav.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Nav.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Nav.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/NavLink.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/components/MenuLink.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/NavLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/NavLink.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/layout.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mdx-components.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/mdx-components.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/globals.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,7 +138,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1698934246135</updated>
-      <workItem from="1698934247234" duration="37587000" />
+      <workItem from="1698934247234" duration="38414000" />
     </task>
     <task id="LOCAL-00001" summary="Opprett nextjs-prosjekt">
       <option name="closed" value="true" />
@@ -275,7 +260,23 @@
       <option name="project" value="LOCAL" />
       <updated>1699273028503</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Tillat nøsting i nav-menyen">
+      <option name="closed" value="true" />
+      <created>1699278775962</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1699278775962</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Støtt dark-mode">
+      <option name="closed" value="true" />
+      <created>1699279416536</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1699279416536</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -306,7 +307,9 @@
     <MESSAGE value="Bruk riktig basePath og assetPrefix" />
     <MESSAGE value="Ikke bruk jekyll" />
     <MESSAGE value="Ikke bruk jekyll&#10;&#10;&#10;Co-authored-by: Martine Enger &lt;marenger@student.matnat.uio.no&gt;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ikke bruk jekyll&#10;&#10;&#10;Co-authored-by: Martine Enger &lt;marenger@student.matnat.uio.no&gt;" />
+    <MESSAGE value="Tillat nøsting i nav-menyen" />
+    <MESSAGE value="Støtt dark-mode" />
+    <option name="LAST_COMMIT_MESSAGE" value="Støtt dark-mode" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

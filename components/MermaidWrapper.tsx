@@ -3,8 +3,16 @@
 import { useEffect } from "react"
 import mermaid from "mermaid"
 
+const prefersDarkMode = () => {
+  return (
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+  )
+}
+
 mermaid.initialize({
   startOnLoad: true,
+  theme: prefersDarkMode() ? "dark" : "default",
 })
 
 type Props = {
