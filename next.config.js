@@ -6,6 +6,7 @@ import rehypeSlug from "rehype-slug"
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "export",
+  assetPrefix: "/",
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
   experimental: {
     webpackBuildWorker: true,
