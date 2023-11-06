@@ -24,8 +24,8 @@ graph LR
     osur["`OS/UR`"]
 
     vedtak -->|REST| dp-iverksett
-    dp-iverksett --->|REST| dp-oppdrag
-    dp-oppdrag -->|Send-kø| osur
-    dp-oppdrag -->|Kvittering-kø| osur
-    dp-oppdrag -->|Avstemming-kø| osur
+    dp-iverksett -->|REST| dp-oppdrag
+    dp-oppdrag ====>|Send-kø| osur
+    dp-oppdrag ====>|Kvittering-kø| osur
+    dp-oppdrag ====>|Avstemming-kø| osur
 ```

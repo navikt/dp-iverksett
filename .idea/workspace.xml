@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fca8d8ab-969c-4bd6-ba78-5645c259aed9" name="Changes" comment="Støtt dark-mode">
+      <change afterPath="$PROJECT_DIR$/app/not-found.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/not-found.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/page.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.mdx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,8 +20,8 @@
       <list>
         <option value="TypeScript File" />
         <option value="CSS File" />
-        <option value="CSS Module File" />
         <option value="TypeScript JSX File" />
+        <option value="CSS Module File" />
       </list>
     </option>
   </component>
@@ -82,9 +84,9 @@
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="next export" />
-      <command value="npm run build" />
       <command value="npm run start" />
       <command value="npm run dev" />
+      <command value="npm run build" />
     </option>
   </component>
   <component name="RunManager">
@@ -121,8 +123,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.dev" />
-        <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
+        <item itemvalue="npm.start" />
       </list>
     </recent_temporary>
   </component>
@@ -138,7 +140,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1698934246135</updated>
-      <workItem from="1698934247234" duration="38414000" />
+      <workItem from="1698934247234" duration="39344000" />
     </task>
     <task id="LOCAL-00001" summary="Opprett nextjs-prosjekt">
       <option name="closed" value="true" />
@@ -276,7 +278,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699279416536</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Støtt dark-mode">
+      <option name="closed" value="true" />
+      <created>1699279563061</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1699279563061</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
