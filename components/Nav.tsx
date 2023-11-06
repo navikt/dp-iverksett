@@ -1,5 +1,5 @@
 import { buildDirectoryStructure } from "@/app/directoryStructure"
-import { NavLink } from "@/app/NavLink"
+import { NavLink } from "@/components/NavLink"
 
 import styles from "./Nav.module.css"
 

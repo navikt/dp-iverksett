@@ -8,12 +8,18 @@
 .header {
   padding: 1rem 1.25rem;
   border-bottom: 1px solid var(--a-border-default);
-}
-
-.link {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1.5rem;
+}
+
+.headerDivider {
+  width: 1px;
+  height: 1.5rem;
+  background: var(--a-border-default);
+}
+
+.headerLink {
   text-decoration: none;
   width: max-content;
 }

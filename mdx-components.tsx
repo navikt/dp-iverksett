@@ -4,7 +4,7 @@ import { BodyLong, Heading } from "@navikt/ds-react"
 import styles from "./mdx-components.module.css"
 import dynamic from "next/dynamic"
 
-const MermaidWrapper = dynamic(() => import("@/app/MermaidWrapper"), {
+const MermaidWrapper = dynamic(() => import("@/components/MermaidWrapper"), {
   ssr: false,
 })
 

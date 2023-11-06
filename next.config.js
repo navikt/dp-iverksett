@@ -6,8 +6,9 @@ import rehypeSlug from "rehype-slug"
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "export",
-  assetPrefix: "/dp-iverksett",
-  basePath: "/dp-iverksett",
+  assetPrefix:
+    process.env.NODE_ENV === "production" ? "/dp-iverksett" : undefined,
+  basePath: process.env.NODE_ENV === "production" ? "/dp-iverksett" : undefined,
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
   experimental: {
     webpackBuildWorker: true,
