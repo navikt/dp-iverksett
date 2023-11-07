@@ -1,6 +1,5 @@
 .link {
   text-decoration: none;
-  color: var(--a-text-subtle);
   padding: 0.5rem 2rem 0.5rem 0.75rem;
   width: 100%;
   flex: 1;
