@@ -24,7 +24,11 @@ export function MermaidWrapper({ chart }: Props) {
     mermaid.contentLoaded()
   }, [])
 
-  return <div className="mermaid">{chart}</div>
+  return (
+    <div className="mermaid" style={{ width: "100%" }}>
+      {chart}
+    </div>
+  )
 }
 
 export default MermaidWrapper

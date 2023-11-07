@@ -3,7 +3,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { Source_Sans_3 } from "next/font/google"
 import clsx from "clsx"
-import { BodyShort, HGrid, HStack } from "@navikt/ds-react"
+import { BodyShort, HStack } from "@navikt/ds-react"
 import { GithubIcon } from "@/components/GithubIcon"
 import { Nav } from "@/components/Nav"
 import "./globals.css"
@@ -43,12 +43,14 @@ export default function RootLayout({ children }: Props) {
             <GithubIcon />
           </Link>
         </header>
-        <HGrid columns="max-content auto" className={styles.container}>
+        <HStack wrap={false} className={styles.container}>
           <section className={styles.sideBar}>
             <Nav />
           </section>
-          <main className={styles.mainContent}>{children}</main>
-        </HGrid>
+          <main className={styles.mainContent}>
+            <section className={styles.mdxContent}>{children}</section>
+          </main>
+        </HStack>
       </body>
     </html>
   )
