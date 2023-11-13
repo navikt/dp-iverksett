@@ -2,11 +2,6 @@ import type { MDXComponents } from "mdx/types"
 import { BodyLong, Heading } from "@navikt/ds-react"
 
 import styles from "./mdx-components.module.css"
-import dynamic from "next/dynamic"
-
-const MermaidWrapper = dynamic(() => import("@/components/MermaidWrapper"), {
-  ssr: false,
-})
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -33,7 +28,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     p: ({ children }) => (
       <BodyLong className={styles.blockM}>{children}</BodyLong>
     ),
-    mermaid: MermaidWrapper,
     ...components,
   }
 }

@@ -1,7 +1,7 @@
 import createMDX from "@next/mdx"
 import remarkGfm from "remark-gfm"
-import mdxMermaid from "mdx-mermaid"
 import rehypeSlug from "rehype-slug"
+import rehypeMermaid from "rehype-mermaid";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -17,8 +17,8 @@ const nextConfig = {
 
 const withMDX = createMDX({
   options: {
-    remarkPlugins: [remarkGfm, mdxMermaid],
-    rehypePlugins: [rehypeSlug],
+    remarkPlugins: [remarkGfm],
+    rehypePlugins: [rehypeSlug, [rehypeMermaid, { strategy: "inline-svg" }]],
   },
 })
 
