@@ -1,4 +1,5 @@
 import React from "react"
+import Link from "next/link"
 import { DocsThemeConfig } from "nextra-theme-docs"
 import { Detail } from "@navikt/ds-react"
 
@@ -22,6 +23,14 @@ const config: DocsThemeConfig = {
   },
   editLink: {
     text: <Detail>Rediger denne siden</Detail>,
+    component: ({ className, children, filePath }) => (
+      <Link
+        className={className}
+        href={`https://github.com/navikt/dp-iverksett/blob/docs/${filePath}`}
+      >
+        {children}
+      </Link>
+    ),
   },
   toc: {
     title: (
