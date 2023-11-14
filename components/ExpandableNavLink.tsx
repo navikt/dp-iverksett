@@ -22,7 +22,7 @@ export function ExpandableNavLink({ name, subDirectories, href }: Props) {
   const pathname = usePathname()
 
   useLayoutEffect(() => {
-    setShowLinks(pathname.includes(href))
+    setShowLinks(pathname?.includes(href) ?? false)
   }, [href, pathname])
 
   const toggleShowLinks = (event: React.MouseEvent) => {
