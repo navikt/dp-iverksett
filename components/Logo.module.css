@@ -1,0 +1,5 @@
+.headerDivider {
+  width: 1px;
+  background: var(--a-border-default);
+  height: 1.5rem;
+}

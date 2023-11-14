@@ -31,27 +31,15 @@ p, h1, h2, h3, h4, h5, h6 {
   isolation: isolate;
 }
 
-
-:root {
-  --mermaid-cluster-fill: var(--a-bg-subtle);
-  --mermaid-cluster-stroke: var(--a-border-subtle);
-  --mermaid-node-fill: var(--a-orange-100);
-  --mermaid-node-stroke: var(--a-orange-400);
-  --mermaid-line-color: var(--a-blue-400);
-}
-
 @media (prefers-color-scheme: dark) {
-  :root {
+  html:not(.light) {
     --a-text-default: var(--a-text-on-inverted);
-    --a-text-subtle: var(--a-text-on-inverted);
+    --a-text-subtle: var(--a-gray-400);
     --a-bg-default: #111;
     --a-bg-subtle: #222;
     --a-text-action: var(--a-blue-300);
     --a-border-default: var(--a-gray-700);
     --a-border-subtle: var(--a-gray-800);
     --a-surface-neutral-subtle-hover: var(--a-bg-subtle);
-
-    --mermaid-node-fill: var(--a-orange-900);
-    --mermaid-node-stroke: var(--a-orange-500);
   }
 }

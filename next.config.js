@@ -1,8 +1,4 @@
-import createMDX from "@next/mdx"
-import remarkGfm from "remark-gfm"
-import rehypeSlug from "rehype-slug"
-import rehypeMermaid from "rehype-mermaid";
-import { mermaidConfig } from "./mermaid.config.js";
+import withNextra from "nextra"
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -10,23 +6,13 @@ const nextConfig = {
   assetPrefix:
     process.env.NODE_ENV === "production" ? "/dp-iverksett" : undefined,
   basePath: process.env.NODE_ENV === "production" ? "/dp-iverksett" : undefined,
-  pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
-  experimental: {
-    webpackBuildWorker: true,
+  images: {
+    unoptimized: true,
   },
 }
 
-const withMDX = createMDX({
-  options: {
-    remarkPlugins: [remarkGfm],
-    rehypePlugins: [
-      rehypeSlug,
-      [
-        rehypeMermaid,
-        { strategy: "inline-svg", mermaidConfig }
-      ]
-    ],
-  },
-})
-
-export default withMDX(nextConfig)
+export default withNextra({
+  theme: "nextra-theme-docs",
+  themeConfig: "./theme.config.tsx",
+  unstable_staticImage: false,
+})(nextConfig)
