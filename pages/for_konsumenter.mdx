@@ -11,21 +11,20 @@ nais-konfig:
 
 ```yaml
 accessPolicy:
-    outbound:
-      rules:
-        - application: dp-iverksett
-          namespace: teamdagpenger
+  outbound:
+    rules:
+      - application: dp-iverksett
+        namespace: teamdagpenger
 ```
 
-Tilsvarende må vi åpne for trafikk fra deres klient-app i dp-iverksett. Opprett en pull request i dp-iverksett med følgende
-kodesnutt i dp-iverksett sin nais-konfig:
+Tilsvarende må vi åpne for trafikk fra deres klient-applikasjon i dp-iverksett. Opprett en pull request i dp-iverksett med følgende kodesnutt i nais-konfig:
 
 ```yaml
 accessPolicy:
-    inbound:
-      rules:
-        - application: [applikasjonsnavn]
-          namespace: [namespace]
+  inbound:
+    rules:
+      - application: [applikasjonsnavn]
+        namespace: [namespace]
 ```
 
 Merk at disse reglene legger opp til service-til-service-kommunikasjon innenfor samme kubernetes-cluster. Det vil si at

@@ -6,8 +6,38 @@ title: Iverksetting
 
 ## POST /api/iverksetting
 
-Sender en utbetaling til NAVs økonomisystem.
+Sender en utbetaling til NAVs økonomisystem. Når API-et mottar en utbetaling som skal iverksettes, gjør den noen enkle valideringer
+og svarer med en `202 Accepted` dersom valideringene går gjennom. Resten av løypa for å utbetale er helt asynkron og orkestreres
+internt i dp-iverksett. En ok-respons fra API-et betyr altså _ikke_ at utbetalingen er kvittert ok i økonomisystemet, men at
+dp-iverksett tar ansvaret for videre håndtering. Bruk status-endepunktet for å sjekke status på utbetalingen.
+
+Følgende må være oppfylt for at dp-iverksett skal akseptere utbetalingen:
+
+**Format på utbetaling**
+* Utbetalingsperiodene må ikke overlappe i tid
+* Utbetalingsperiodene må være gyldige perioder, dvs. at fom-dato på en periode må være før tom-dato.
+* Alle beløp må være positive heltall. Dvs. alle beløp må være hele kroner, og tjenesten aksepterer ikke 0-utbetalinger eller negative utbetalinger
+* Alle beløp må være under maksgrensen på 5000 kr/dag
+
+**Tilstand**
+* dp-iverksett kan ikke allerede ha en utbetaling med samme behandlingsid
+* Evt. tidligere utbetaling må tilhøre samme sak og person
+* Evt. tidligere utbetaling på saken må være ferdig iverksatt
+
+Videre er det noen ytelsesspesifikke valideringer. Ta kontakt med oss dersom din ytelse har spesielle behov.
 
 ## GET /\{behandlingId\}/status
 
-Henter status på utbetaling.
+Henter status på utbetaling. Dette endepunktet kan brukes for å sjekke tilstanden til en utbetaling som er tatt i mot og
+validert av dp-iverksett. NAVs økonomisystem har en asynkron integrasjon og er i tillegg et stormaskinsystem som har definerte
+oppetider. Økonomisystemet er stengt mellom i helger, helligdager og mellom kl 21 og kl 6 på virkedager. Derfor kan det
+ta lang tid før en utbetaling blir kvittert ut fra økonomisystemet avhengig av når den er sendt inn.
+
+Dersom dp-iverksett finner behandlingen, vil endepunktet svare med `200 OK` og en av følgende statuser i body:
+
+| Status             | Beskrivelse                                                                        |
+|--------------------|------------------------------------------------------------------------------------|
+| IKKE_PAABEGYNT     | Ikke sendt til økonomisystemet                                                     |
+| SENDT_TIL_OPPDRAG  | Sendt til økonomisystemet, venter på svar                                          |
+| FEILET_MOT_OPPDRAG | Feilkvittering fra økonomisystemet. Kan være enten teknisk eller funksjonell feil. |
+| OK                 | Kvittert OK fra økonomisystemet og ferdigstilt.                                    |
