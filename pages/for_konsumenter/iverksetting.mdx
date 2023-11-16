@@ -2,7 +2,7 @@
 title: Iverksetting
 ---
 
-# Iverksetting
+# Endepunkter for iverksetting av utbetaling
 
 ## POST /api/iverksetting
 
@@ -26,18 +26,91 @@ Følgende må være oppfylt for at dp-iverksett skal akseptere utbetalingen:
 
 Videre er det noen ytelsesspesifikke valideringer. Ta kontakt med oss dersom din ytelse har spesielle behov.
 
-## GET /\{behandlingId\}/status
+### Utbetalinger
 
-Henter status på utbetaling. Dette endepunktet kan brukes for å sjekke tilstanden til en utbetaling som er tatt i mot og
-validert av dp-iverksett. NAVs økonomisystem har en asynkron integrasjon og er i tillegg et stormaskinsystem som har definerte
-oppetider. Økonomisystemet er stengt mellom i helger, helligdager og mellom kl 21 og kl 6 på virkedager. Derfor kan det
-ta lang tid før en utbetaling blir kvittert ut fra økonomisystemet avhengig av når den er sendt inn.
+Listen av utbetalinger som dp-iverksett tar i mot følger dette formatet:
+```json
+{
+ "beløpPerDag": "int",
+ "fraOgMed": "date",
+ "tilOgMed": "date",
+ "stønadstype": "enum"
+}
+```
+Utbetalingene må altså periodiseres og klienten må fastsette et beløp per dag for perioden. Dersom beløpet eller stønadstypen
+endrer seg eller brukeren har dager i perioden uten utbetaling (eksempelvis helg), må det opprettes ny periode.
 
-Dersom dp-iverksett finner behandlingen, vil endepunktet svare med `200 OK` og en av følgende statuser i body:
+_Eksempler_ (kan vi få dette i en sånn toggle-greie)
 
-| Status             | Beskrivelse                                                                        |
-|--------------------|------------------------------------------------------------------------------------|
-| IKKE_PAABEGYNT     | Ikke sendt til økonomisystemet                                                     |
-| SENDT_TIL_OPPDRAG  | Sendt til økonomisystemet, venter på svar                                          |
-| FEILET_MOT_OPPDRAG | Feilkvittering fra økonomisystemet. Kan være enten teknisk eller funksjonell feil. |
-| OK                 | Kvittert OK fra økonomisystemet og ferdigstilt.                                    |
+Bruker skal ha utbetaling mandag-fredag med 500kr/dag tom onsdag og 400kr/dag fom torsdag. Det representeres med følgende utbetalingsperioder:
+```json
+[
+  {
+    "beløpPerDag": 500,
+    "fraOgMed": "2023-11-13",
+    "tilOgMed": "2023-11-15"
+  },
+  {
+    "beløpPerDag": 400,
+    "fraOgMed": "2023-11-16",
+    "tilOgMed": "2023-11-17"
+  }
+]
+```
+
+Bruker skal ha 500kr/dag for 14 dager, med unntak av helger. Det representeres med følgende utbetalingsperioder:
+```json
+[
+  {
+    "beløpPerDag": 500,
+    "fraOgMed": "2023-11-13",
+    "tilOgMed": "2023-11-17"
+  },
+  {
+    "beløpPerDag": 500,
+    "fraOgMed": "2023-11-20",
+    "tilOgMed": "2023-11-24"
+  }
+]
+```
+
+Merk at dp-iverksett _må_ ha beløp per dag for meldepliktsytelser uavhengig av hvordan vedtaksløsningen representerer utbetalingene
+internt. Dette kommer av føringer fra NAVs økonomisystem. Dersom din vedtaksløsning feks representerer utbetalingen som et
+totalbeløp for en 14-dagers periode, må dere på konsumentsiden fordele dette totalbeløpet på dagsbeløp slik dere ser det hensiktsmessig.
+
+### Tilgangskontroll og validering av vedtak
+
+Funksjonaliteten som tilbys i dp-iverksett er direkte koblet til penger som betales ut fra NAV til sluttbruker. Det kan ha store konsekvenser
+dersom vi betaler ut for mye penger eller penger til feil bruker. Derfor er vi nødt til å ha streng tilgangskontroll på vedtakene som dp-iverksett
+tar i mot.
+
+Meldepliktsytelsene har gjerne en todelt flyt der det først fattes et vedtak om rett til ytelsen, og så danner meldekortene brukeren sender inn
+grunnlaget for hva som skal utbetales i en gitt periode. Meldekortene behandles stort sett fullautomatisk av vedtaksløsningen, mens vedtaket om
+rett kan behandles helt eller delvis manuelt.
+
+Dp-iverksett krever at konsumentene sender både vedtak om rett og utbetalingene som følger av meldekortene, med riktig kontekst. Tjenesten vil validere
+at vedtak med saksbehandler-kontekst kommer fra en ansatt med beslutter-rolle for ytelsen. Videre har dp-iverksett oversikt over hvilken klient-applikasjon som
+har tilgang til å gjøre kall med ren system-kontekst for hver ytelse.
+
+Dersom dp-iverksett mottar en utbetaling som ikke kan spores tilbake til et vedtak om rett til ytelsen eller mottar en utbetaling fra en applikasjon
+som ikke har tilgang til å kalle med system-kontekst, vil utbetalingen avvises.
+
+For vedtaket om rett til ytelsen trenger dp-iverksett å vite saksid, behandlingsid og sluttbrukeren vedtaket gjelder. Disse vedtakene kan sendes
+til det samme endepunktet som utbetalingene sendes til. I kontraktene finnes det en default-verdi for vedtaksdetaljer for slike vedtak. Informasjonen
+dp-iverksett krever er eksemplifisert under:
+
+```json
+{
+  "sakId": "ec45be1c-1f2d-451e-bea3-e5a240586287",
+  "behandlingId": "f28417ba-78bb-440b-985c-fc1f0330c1c2",
+  "personIdent": "<fnr>",
+  "vedtak": {
+    "vedtakstype": "RAMMEVEDTAK",
+    "resultat": "INNVILGET",
+    "vedtakstidspunkt": "2023-06-19T15:24:14",
+    "saksbehandlerId": "S123456",
+    "beslutterId": "B123456",
+    "utbetalinger": []
+  }
+}
+```

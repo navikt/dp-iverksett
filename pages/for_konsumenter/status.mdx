@@ -1,0 +1,23 @@
+---
+title: Status på utbetaling
+---
+
+## GET /\{behandlingId\}/status
+
+Henter status på utbetaling. Dette endepunktet kan brukes for å sjekke tilstanden til en utbetaling som er tatt i mot og
+validert av dp-iverksett. NAVs økonomisystem har en asynkron integrasjon og er i tillegg et stormaskinsystem som har definerte
+oppetider. Økonomisystemet er stengt mellom i helger, helligdager og mellom kl 21 og kl 6 på virkedager. Derfor kan det
+ta lang tid før en utbetaling blir kvittert ut fra økonomisystemet avhengig av når den er sendt inn.
+
+Dersom dp-iverksett finner behandlingen, vil endepunktet svare med `200 OK` og en av følgende statuser i body:
+
+| Status             | Beskrivelse                                                                        |
+|--------------------|------------------------------------------------------------------------------------|
+| IKKE_PAABEGYNT     | Ikke sendt til økonomisystemet                                                     |
+| SENDT_TIL_OPPDRAG  | Sendt til økonomisystemet, venter på svar                                          |
+| FEILET_MOT_OPPDRAG | Feilkvittering fra økonomisystemet. Kan være enten teknisk eller funksjonell feil. |
+| OK                 | Kvittert OK fra økonomisystemet og ferdigstilt.                                    |
+
+NB! Vi har mulighet til å tilby et Kafka-topic der konsumentene kan lytte på status-oppdateringer på utbetalinger. Dette er p.t.
+ikke satt opp, men vi bruker gjerne tid på det dersom behovet er der. Ta kontakt med oss dersom dette høres interessant ut
+for dere.
