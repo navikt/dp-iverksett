@@ -2,7 +2,7 @@
 title: Iverksetting
 ---
 
-# Endepunkter for iverksetting av utbetaling
+# Endepunkt for iverksetting av utbetaling
 
 ## POST /api/iverksetting
 
@@ -84,17 +84,21 @@ Listen av utbetalinger som dp-iverksett tar i mot skal være det gjeldende total
 på samme måte uavhengig av om vedtaket som iverksettes er en førstegangsutbetaling eller en korrigering: Når dp-iverksett beregner hva som skal sendes
 til utbetalingssystemet, regner den ut forskjellen på totalbildet for det nye vedtaket og totalbildet for det evt. forrige vedtaket som ble iverksatt.
 
-Under er et eksempel på hvordan dette totalbildet kan se ut for 10 meldekort som sendes inn og korrigeres:
+Konseptet er illustrert i figuren under for 3 meldekort, der ett meldekort korrigeres:
+![Totalbilde av utbetalinger konsept](/totalbilde_utbetalinger2.png)
+I denne figuren er D en dag med utbetaling og H er en helgedag uten utbetaling. Rosa farge indikerer en dag med korrigert utbetaling.
+
+Under er et eksempel på hvordan dataen for dette totalbildet kan se ut for 10 meldekort som sendes inn og korrigeres:
 ![Totalbilde av utbetalinger eksempel](/totalbilde_utbetalinger.png)
 
-I det første meldekortet som sendes inn (B-2) er det gjeldende totalbildet utbetaling for uke 1 og 2. For det neste meldekortet som sendes inn (B-3),
+I det første meldekortet som sendes inn (B-2) er det gjeldende totalbildet utbetaling for uke 1 og 2. For det neste meldekortet som sendes inn (B-3)
 er det gjeldende totalbildet utbetaling for uke 1 og 2 _og_ uke 3 og 4. Dersom vedtaksløsningen vil iverksette en korrigering av utbetalingen for uke 1 og 2 (B-4),
 sender den inn den nye sannheten for uke 1 og 2 _og_ uendret utbetaling for uke 3 og 4. Her er det to ting å merke seg:
 1. Ved en korrigering skal dp-iverksett alltid ha _ny gjeldende sannhet_, ikke differansen mellom ny og forrige utbetaling.
 2. dp-iverksett vil ikke agere på noe dersom totalbildet er uendret. Hvis totalbildet for deler av utbetalingen er uendret, som uke 3 og 4 over,
 vil det ikke skje noe med denne perioden. Hvis totalbildet for hele saken er uendret, vil ikke dp-iverksett sende noe til utbetalingssystemet.
 
-Merk også at korrigeringen av utbetalingen for uke 5-6 (B-7) er et opphør. Ved opphør av utbetaling, forventer dp-iverksett at det ikke finnes noen utbetalinger
+Merk også at korrigeringen av utbetalingen for uke 5-6 (B-7) er et opphør. Ved opphør av utbetaling forventer dp-iverksett at det ikke finnes noen utbetalinger
 for perioden opphøret gjelder for. I dette eksempelet er altså alle utbetalingene for uke 5-6 fjernet fra listen. Dersom man vil iverksette et opphør av alle utbetalinger på saken,
 kan man sende en tom liste av utbetalinger til dp-iverksett.
 
@@ -108,12 +112,12 @@ Meldepliktsytelsene har gjerne en todelt flyt der det først fattes et vedtak om
 grunnlaget for hva som skal utbetales i en gitt periode. Meldekortene behandles stort sett fullautomatisk av vedtaksløsningen, mens vedtaket om
 rett kan behandles helt eller delvis manuelt.
 
-Dp-iverksett krever at konsumentene sender både vedtak om rett og utbetalingene som følger av meldekortene, med riktig kontekst. Tjenesten vil validere
+Dp-iverksett krever at konsumentene sender både vedtaket om rett og vedtakene for utbetaling som følger av meldekortene, med riktig kontekst. Tjenesten vil validere
 at vedtak med saksbehandler-kontekst kommer fra en ansatt med beslutter-rolle for ytelsen. Videre har dp-iverksett oversikt over hvilken klient-applikasjon som
 har tilgang til å gjøre kall med ren system-kontekst for hver ytelse.
 
 Dersom dp-iverksett mottar en utbetaling som ikke kan spores tilbake til et vedtak om rett til ytelsen eller mottar en utbetaling fra en applikasjon
-som ikke har tilgang til å kalle med system-kontekst, vil utbetalingen avvises.
+som ikke har tilgang til å gjøre kall med system-kontekst, vil utbetalingen avvises.
 
 For vedtaket om rett til ytelsen trenger dp-iverksett å vite saksid, behandlingsid og sluttbrukeren vedtaket gjelder. Disse vedtakene kan sendes
 til det samme endepunktet som utbetalingene sendes til. I kontraktene finnes det en default-verdi for vedtaksdetaljer for slike vedtak. Informasjonen
