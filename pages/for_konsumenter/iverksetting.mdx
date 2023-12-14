@@ -100,10 +100,13 @@ Under er et eksempel på hvordan dataen for dette totalbildet kan se ut for 7 me
 
 I det første meldekortet som sendes inn (B-2) er det gjeldende totalbildet utbetaling for uke 1 og 2. For det neste meldekortet som sendes inn (B-3)
 er det gjeldende totalbildet utbetaling for uke 1 og 2 _og_ uke 3 og 4. Dersom vedtaksløsningen vil iverksette en korrigering av utbetalingen for uke 1 og 2 (B-4),
-sender den inn den nye sannheten for uke 1 og 2 _og_ uendret utbetaling for uke 3 og 4. Her er det to ting å merke seg:
+sender den inn den nye sannheten for uke 1 og 2 _og_ uendret utbetaling for uke 3 og 4. Her er det tre ting å merke seg:
 1. Ved en korrigering skal dp-iverksett alltid ha _ny gjeldende sannhet_, ikke differansen mellom ny og forrige utbetaling.
 2. dp-iverksett vil ikke agere på noe dersom totalbildet er uendret. Hvis totalbildet for deler av utbetalingen er uendret, som uke 3 og 4 over,
 vil det ikke skje noe med denne perioden. Hvis totalbildet for hele saken er uendret, vil ikke dp-iverksett sende noe til utbetalingssystemet.
+3. Dersom det har vært utbetaling på saken tidligere, må dp-iverksett ha behandlingsid for den forrige behandlingen som ble iverksatt. Behandlingsid-en brukes til å hente ut
+det _forrige_ totalbildet av utbetalinger på saken, slik at dp-iverksett kan utlede om den nye behandlingen er utbetaling for en ny periode eller om det er en korrigering
+(og i så fall hva som skal korrigeres).
 
 Merk også at korrigeringen av utbetalingen for uke 5-6 (B-6) er et opphør. Ved opphør av utbetaling forventer dp-iverksett at det ikke finnes noen utbetalinger
 for perioden opphøret gjelder for. I dette eksempelet er altså alle utbetalingene for uke 5-6 fjernet fra listen. Dersom man vil iverksette et opphør av alle utbetalinger på saken,
