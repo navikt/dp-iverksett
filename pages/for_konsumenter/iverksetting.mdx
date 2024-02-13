@@ -34,7 +34,10 @@ Listen av utbetalinger som dp-iverksett tar i mot følger dette formatet:
  "beløpPerDag": "int",
  "fraOgMed": "date",
  "tilOgMed": "date",
- "stønadstype": "enum"
+ "stønadsdata": {
+    "stønadstype": "enum",
+    <ekstra felter spesifikke for ytelsen>
+ }
 }
 ```
 Utbetalingene må altså periodiseres og klienten må fastsette et beløp per dag for perioden. Dersom beløpet eller stønadstypen
@@ -80,7 +83,7 @@ Bruker skal ha 500kr/dag for 14 dager, med unntak av helger. Det representeres m
 </details>
 
 Merk at dp-iverksett _må_ ha beløp per dag for meldepliktsytelser uavhengig av hvordan vedtaksløsningen representerer utbetalingene
-internt. Dette kommer av føringer fra NAVs økonomisystem. Dersom din vedtaksløsning feks representerer utbetalingen som et
+internt. Dette kommer av føringer fra NAVs økonomisystem. Dersom din vedtaksløsning feks. representerer utbetalingen som et
 totalbeløp for en 14-dagers periode, må dere på konsumentsiden fordele dette totalbeløpet på dagsbeløp slik dere ser det hensiktsmessig.
 
 ### Gjeldende totalbilde av utbetalinger på saken
@@ -90,12 +93,12 @@ på samme måte uavhengig av om vedtaket som iverksettes er en førstegangsutbet
 til utbetalingssystemet, regner den ut forskjellen på totalbildet for det nye vedtaket og totalbildet for det evt. forrige vedtaket som ble iverksatt.
 
 Konseptet er illustrert i figuren under for 3 meldekort, der ett meldekort korrigeres:
-![Totalbilde av utbetalinger konsept](/totalbilde_utbetalinger2.png)
+![Totalbilde av utbetalinger konsept](/totalbilde_utbetalinger1.png)
 (_Åpne bildet i ny fane for bedre oppløsning - må prøve å fikse dette_)
 I denne figuren er D en dag med utbetaling og H er en helgedag uten utbetaling. Rosa farge indikerer en dag med korrigert utbetaling.
 
 Under er et eksempel på hvordan dataen for dette totalbildet kan se ut for 7 meldekort som sendes inn og korrigeres:
-![Totalbilde av utbetalinger eksempel](/totalbilde_utbetalinger1.png)
+![Totalbilde av utbetalinger eksempel](/totalbilde_utbetalinger2.png)
 (_Åpne bildet i ny fane for bedre oppløsning - må prøve å fikse dette_)
 
 I det første meldekortet som sendes inn (B-2) er det gjeldende totalbildet utbetaling for uke 1 og 2. For det neste meldekortet som sendes inn (B-3)
@@ -112,17 +115,121 @@ Merk også at korrigeringen av utbetalingen for uke 5-6 (B-6) er et opphør. Ved
 for perioden opphøret gjelder for. I dette eksempelet er altså alle utbetalingene for uke 5-6 fjernet fra listen. Dersom man vil iverksette et opphør av alle utbetalinger på saken,
 kan man sende en tom liste av utbetalinger til dp-iverksett.
 
+### Periodisering av utbetalinger
+
+Utbetalingsperiodene som sendes til utbetalingstjenesten vil bli sendt videre til Økonomisystemet med samme periodisering som utbetalingstjenesten mottar. Økonomisystemet/PO Utbetaling
+har et ønske om å minimere antall identiske utbetalingsperioder som sendes. Dette illustreres best ved et eksempel. Dersom man vil iverksette en utbetaling for mandag-fredag med likt dagsbeløp og stønadstype,
+er det bedre å sende dette som én periode:
+```json
+[
+  {
+    "beløpPerDag": 500,
+    "fraOgMed": "2024-02-12",
+    "tilOgMed": "2024-02-16",
+    "stønadsdata": {
+      "stønadstype": "DAGPENGER_ARBEIDSSØKER_ORDINÆR"
+    }
+  }
+]
+```
+
+Heller enn å sende 5 identiske perioder:
+```json
+[
+  {
+    "beløpPerDag": 500,
+    "fraOgMed": "2024-02-12",
+    "tilOgMed": "2024-02-12",
+    "stønadsdata": {
+      "stønadstype": "DAGPENGER_ARBEIDSSØKER_ORDINÆR"
+    }
+  },
+  {
+    "beløpPerDag": 500,
+    "fraOgMed": "2024-02-13",
+    "tilOgMed": "2024-02-13",
+    "stønadsdata": {
+      "stønadstype": "DAGPENGER_ARBEIDSSØKER_ORDINÆR"
+    }
+  },
+  {
+    "beløpPerDag": 500,
+    "fraOgMed": "2024-02-14",
+    "tilOgMed": "2024-02-14",
+    "stønadsdata": {
+      "stønadstype": "DAGPENGER_ARBEIDSSØKER_ORDINÆR"
+    }
+  },
+  {
+    "beløpPerDag": 500,
+    "fraOgMed": "2024-02-15",
+    "tilOgMed": "2024-02-15",
+    "stønadsdata": {
+      "stønadstype": "DAGPENGER_ARBEIDSSØKER_ORDINÆR"
+    }
+  },
+  {
+    "beløpPerDag": 500,
+    "fraOgMed": "2024-02-16",
+    "tilOgMed": "2024-02-16",
+    "stønadsdata": {
+      "stønadstype": "DAGPENGER_ARBEIDSSØKER_ORDINÆR"
+    }
+  }
+]
+```
+
+Utbetalingsperioder som sendes på tvers av behandlinger må imidlertid deles opp selv om de er like og ligger back-to-back i tid. Eksempelvis:
+
+Dersom man i behandling #1 iverksetter følgende utbetalingsperiode:
+```json
+[
+  {
+    "beløpPerDag": 500,
+    "fraOgMed": "2024-02-12",
+    "tilOgMed": "2024-02-16",
+    "stønadsdata": {
+      "stønadstype": "DAGPENGER_ARBEIDSSØKER_ORDINÆR"
+    }
+  }
+]
+```
+
+Og man i behandling #2 vil iverksette flere dager med utbetaling, må dette deles i to:
+```json
+[
+  {
+    "beløpPerDag": 500,
+    "fraOgMed": "2024-02-12",
+    "tilOgMed": "2024-02-16",
+    "stønadsdata": {
+      "stønadstype": "DAGPENGER_ARBEIDSSØKER_ORDINÆR"
+    }
+  },
+  {
+    "beløpPerDag": 500,
+    "fraOgMed": "2024-02-17",
+    "tilOgMed": "2024-02-23",
+    "stønadsdata": {
+      "stønadstype": "DAGPENGER_ARBEIDSSØKER_ORDINÆR"
+    }
+  }
+]
+```
+Dersom disse utbetalingene hadde blitt slått sammen til én periode, vil vi ikke klare å utlede hva som er differansen fra totalbildet i forrige utbetaling.
+
+
 ### Tilgangskontroll og validering av vedtak
 
 Funksjonaliteten som tilbys i dp-iverksett er direkte koblet til penger som betales ut fra NAV til sluttbruker. Det kan ha store konsekvenser
-dersom vi betaler ut for mye penger eller penger til feil bruker. Derfor er vi nødt til å ha streng tilgangskontroll på vedtakene som dp-iverksett
+dersom vi betaler ut for mye penger eller penger til feil person. Derfor er vi nødt til å ha streng tilgangskontroll på vedtakene som dp-iverksett
 tar i mot.
 
 Meldepliktsytelsene har gjerne en todelt flyt der det først fattes et vedtak om rett til ytelsen, og så danner meldekortene brukeren sender inn
 grunnlaget for hva som skal utbetales i en gitt periode. Meldekortene behandles stort sett fullautomatisk av vedtaksløsningen, mens vedtaket om
 rett kan behandles helt eller delvis manuelt.
 
-Dp-iverksett krever at konsumentene sender både vedtaket om rett og vedtakene for utbetaling som følger av meldekortene, med riktig kontekst. Tjenesten vil validere
+Dp-iverksett krever at konsumentene sender både vedtaket om rett og vedtakene for utbetaling som følger av meldekortene med riktig kontekst. Tjenesten vil validere
 at vedtak med saksbehandler-kontekst kommer fra en ansatt med beslutter-rolle for ytelsen. Videre har dp-iverksett oversikt over hvilken klient-applikasjon som
 har tilgang til å gjøre kall med ren system-kontekst for hver ytelse.
 
@@ -139,8 +246,6 @@ dp-iverksett krever er eksemplifisert under:
   "behandlingId": "f28417ba-78bb-440b-985c-fc1f0330c1c2",
   "personIdent": "<fnr>",
   "vedtak": {
-    "vedtakstype": "RAMMEVEDTAK",
-    "resultat": "INNVILGET",
     "vedtakstidspunkt": "2023-06-19T15:24:14",
     "saksbehandlerId": "S123456",
     "beslutterId": "B123456",
@@ -148,3 +253,6 @@ dp-iverksett krever er eksemplifisert under:
   }
 }
 ```
+
+Merk at vi ikke gjør noen validering på feltene saksbehandlerId og beslutterId. Vi sjekker ikke at de er gyldige NAV-identer, og vi sjekker ikke at OBO-tokenet på kallet hører til samme ident
+som identen i beslutterId-feltet.
