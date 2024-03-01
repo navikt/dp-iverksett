@@ -1,6 +1,9 @@
 import { useConfig } from "nextra-theme-docs"
 import { useRouter } from "next/router"
 
+const getTitle = (frontMatter: { title: string }) =>
+  `${frontMatter.title} - DP-Iverksett`
+
 export const CustomHead = () => {
   const { asPath, defaultLocale, locale } = useRouter()
   const { frontMatter } = useConfig()
@@ -8,11 +11,9 @@ export const CustomHead = () => {
     "https://navikt.github.io/dp-iverksett" +
     (defaultLocale === locale ? asPath : `/${locale}${asPath}`)
 
-  console.log(frontMatter)
-
   return (
     <>
-      <title>{frontMatter.title} - DP-Iverksett</title>
+      <title>{getTitle(frontMatter)}</title>
       <meta property="og:url" content={url} />
       <meta
         property="og:title"
