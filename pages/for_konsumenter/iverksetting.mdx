@@ -2,6 +2,9 @@
 title: Iverksetting
 ---
 
+import totalbilde1 from "../../public/totalbilde_utbetalinger1.png"
+import totalbilde2 from "../../public/totalbilde_utbetalinger2.png"
+
 # Endepunkt for iverksetting av utbetaling
 
 ## POST /api/iverksetting
@@ -29,15 +32,15 @@ Videre er det noen ytelsesspesifikke valideringer. Ta kontakt med oss dersom din
 ### Utbetalinger
 
 Listen av utbetalinger som dp-iverksett tar i mot følger dette formatet:
-```json
+```json5
 {
- "beløpPerDag": "int",
- "fraOgMed": "date",
- "tilOgMed": "date",
- "stønadsdata": {
-    "stønadstype": "enum",
-    <ekstra felter spesifikke for ytelsen>
- }
+    "beløpPerDag": "int",
+    "fraOgMed": "date",
+    "tilOgMed": "date",
+    "stønadsdata": {
+        "stønadstype": "enum",
+        // <ekstra_felter_spesifikke_for_ytelsen>
+    }
 }
 ```
 Utbetalingene må altså periodiseres og klienten må fastsette et beløp per dag for perioden. Dersom beløpet eller stønadstypen
@@ -47,7 +50,7 @@ endrer seg eller brukeren har dager i perioden uten utbetaling (eksempelvis helg
 <details>
     <summary>Eksempel 1: Endring i beløp</summary>
 Bruker skal ha utbetaling mandag-fredag med 500kr/dag tom onsdag og 400kr/dag fom torsdag. Det representeres med følgende utbetalingsperioder:
-```json
+```json5
 [
   {
     "beløpPerDag": 500,
@@ -92,14 +95,18 @@ Listen av utbetalinger som dp-iverksett tar i mot skal være det gjeldende total
 på samme måte uavhengig av om vedtaket som iverksettes er en førstegangsutbetaling eller en korrigering: Når dp-iverksett beregner hva som skal sendes
 til utbetalingssystemet, regner den ut forskjellen på totalbildet for det nye vedtaket og totalbildet for det evt. forrige vedtaket som ble iverksatt.
 
-Konseptet er illustrert i figuren under for 3 meldekort, der ett meldekort korrigeres:
-![Totalbilde av utbetalinger konsept](/totalbilde_utbetalinger1.png)
-(_Åpne bildet i ny fane for bedre oppløsning - må prøve å fikse dette_)
+Konseptet er illustrert i figuren under for 3 meldekort, der ett meldekort korrigeres (klikk for å åpne i ny fane):
+
+<a href={totalbilde1.src} target="_blank">
+  ![Totalbilde av utbetalinger konsept](/totalbilde_utbetalinger1.png)
+</a>
 I denne figuren er D en dag med utbetaling og H er en helgedag uten utbetaling. Rosa farge indikerer en dag med korrigert utbetaling.
 
-Under er et eksempel på hvordan dataen for dette totalbildet kan se ut for 7 meldekort som sendes inn og korrigeres:
-![Totalbilde av utbetalinger eksempel](/totalbilde_utbetalinger2.png)
-(_Åpne bildet i ny fane for bedre oppløsning - må prøve å fikse dette_)
+Under er et eksempel på hvordan dataen for dette totalbildet kan se ut for 7 meldekort som sendes inn og korrigeres (klikk for å åpne i ny fane):
+
+<a href={totalbilde2.src} target="_blank">
+  ![Totalbilde av utbetalinger eksempel](/totalbilde_utbetalinger2.png)
+</a>
 
 I det første meldekortet som sendes inn (B-2) er det gjeldende totalbildet utbetaling for uke 1 og 2. For det neste meldekortet som sendes inn (B-3)
 er det gjeldende totalbildet utbetaling for uke 1 og 2 _og_ uke 3 og 4. Dersom vedtaksløsningen vil iverksette en korrigering av utbetalingen for uke 1 og 2 (B-4),
