@@ -34,8 +34,14 @@ graph LR
     vedtak["Vedtaksløsning"]
     osur["OS/UR"]
 
+
+    subgraph kafka
+        topic{{teamdagpenger.iverksetting-status-v1}}
+    end
+
     vedtak -->|REST| dp-iverksett
     dp-iverksett -->|REST| dp-oppdrag
+    dp-iverksett --> topic
     dp-oppdrag ====>|Send-kø| osur
     dp-oppdrag ====>|Kvittering-kø| osur
     dp-oppdrag ====>|Avstemming-kø| osur
