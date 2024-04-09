@@ -11,10 +11,10 @@ import { CustomHead } from "@/components/CustomHead"
 const config: DocsThemeConfig = {
   logo: <Logo />,
   project: {
-    link: "https://github.com/navikt/dp-iverksett",
+    link: "https://github.com/navikt/utsjekk",
   },
   head: CustomHead,
-  docsRepositoryBase: "https://github.com/navikt/dp-iverksett",
+  docsRepositoryBase: "https://github.com/navikt/utsjekk",
   footer: {
     text: "© 2023 NAV IT",
   },
@@ -26,7 +26,7 @@ const config: DocsThemeConfig = {
     component: ({ className, children, filePath }) => (
       <Link
         className={className}
-        href={`https://github.com/navikt/dp-iverksett/blob/docs/${filePath}`}
+        href={`https://github.com/navikt/utsjekk/blob/docs/${filePath}`}
       >
         {children}
       </Link>

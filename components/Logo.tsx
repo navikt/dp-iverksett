@@ -10,7 +10,7 @@ export const Logo = () => (
     <Image src={navLogo.src} alt="" width="64" height="20" />
     <span className={styles.headerDivider} />
     <BodyShort weight="semibold" size="large">
-      DP-Iverksett
+      utsjekk
     </BodyShort>
   </HStack>
 )

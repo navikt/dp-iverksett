@@ -11,10 +11,10 @@ import totalbilde2 from "../../public/totalbilde_utbetalinger2.png"
 
 Sender en utbetaling til NAVs økonomisystem. Når API-et mottar en utbetaling som skal iverksettes, gjør den noen enkle valideringer
 og svarer med en `202 Accepted` dersom valideringene går gjennom. Resten av løypa for å utbetale er helt asynkron og orkestreres
-internt i dp-iverksett. En ok-respons fra API-et betyr altså _ikke_ at utbetalingen er kvittert ok i økonomisystemet, men at
-dp-iverksett tar ansvaret for videre håndtering. Bruk status-endepunktet for å sjekke status på utbetalingen.
+internt i utsjekk. En ok-respons fra API-et betyr altså _ikke_ at utbetalingen er kvittert ok i økonomisystemet, men at
+utsjekk tar ansvaret for videre håndtering. Bruk status-endepunktet for å sjekke status på utbetalingen.
 
-Følgende må være oppfylt for at dp-iverksett skal akseptere utbetalingen:
+Følgende må være oppfylt for at utsjekk skal akseptere utbetalingen:
 
 **Format på utbetaling**
 * Utbetalingsperiodene må ikke overlappe i tid
@@ -23,7 +23,7 @@ Følgende må være oppfylt for at dp-iverksett skal akseptere utbetalingen:
 * Alle beløp må være under maksgrensen på 5000 kr/dag
 
 **Tilstand**
-* dp-iverksett kan ikke allerede ha en utbetaling med samme behandlingsid
+* utsjekk kan ikke allerede ha en utbetaling med samme behandlingsid
 * Evt. tidligere utbetaling må tilhøre samme sak og person
 * Evt. tidligere utbetaling på saken må være ferdig iverksatt
 
@@ -31,7 +31,7 @@ Videre er det noen ytelsesspesifikke valideringer. Ta kontakt med oss dersom din
 
 ### Utbetalinger
 
-Listen av utbetalinger som dp-iverksett tar i mot følger dette formatet:
+Listen av utbetalinger som utsjekk tar i mot følger dette formatet:
 ```json5
 {
     "beløpPerDag": "int",
@@ -85,14 +85,14 @@ Bruker skal ha 500kr/dag for 14 dager, med unntak av helger. Det representeres m
 ```
 </details>
 
-Merk at dp-iverksett _må_ ha beløp per dag for meldepliktsytelser uavhengig av hvordan vedtaksløsningen representerer utbetalingene
+Merk at utsjekk _må_ ha beløp per dag for meldepliktsytelser uavhengig av hvordan vedtaksløsningen representerer utbetalingene
 internt. Dette kommer av føringer fra NAVs økonomisystem. Dersom din vedtaksløsning feks. representerer utbetalingen som et
 totalbeløp for en 14-dagers periode, må dere på konsumentsiden fordele dette totalbeløpet på dagsbeløp slik dere ser det hensiktsmessig.
 
 ### Gjeldende totalbilde av utbetalinger på saken
 
-Listen av utbetalinger som dp-iverksett tar i mot skal være det gjeldende totalbildet av utbetalinger for hele saken. dp-iverksett håndterer utbetalingene
-på samme måte uavhengig av om vedtaket som iverksettes er en førstegangsutbetaling eller en korrigering: Når dp-iverksett beregner hva som skal sendes
+Listen av utbetalinger som utsjekk tar i mot skal være det gjeldende totalbildet av utbetalinger for hele saken. utsjekk håndterer utbetalingene
+på samme måte uavhengig av om vedtaket som iverksettes er en førstegangsutbetaling eller en korrigering: Når utsjekk beregner hva som skal sendes
 til utbetalingssystemet, regner den ut forskjellen på totalbildet for det nye vedtaket og totalbildet for det evt. forrige vedtaket som ble iverksatt.
 
 Konseptet er illustrert i figuren under for 3 meldekort, der ett meldekort korrigeres (klikk for å åpne i ny fane):
@@ -111,16 +111,16 @@ Under er et eksempel på hvordan dataen for dette totalbildet kan se ut for 7 me
 I det første meldekortet som sendes inn (B-2) er det gjeldende totalbildet utbetaling for uke 1 og 2. For det neste meldekortet som sendes inn (B-3)
 er det gjeldende totalbildet utbetaling for uke 1 og 2 _og_ uke 3 og 4. Dersom vedtaksløsningen vil iverksette en korrigering av utbetalingen for uke 1 og 2 (B-4),
 sender den inn den nye sannheten for uke 1 og 2 _og_ uendret utbetaling for uke 3 og 4. Her er det tre ting å merke seg:
-1. Ved en korrigering skal dp-iverksett alltid ha _ny gjeldende sannhet_, ikke differansen mellom ny og forrige utbetaling.
-2. dp-iverksett vil ikke agere på noe dersom totalbildet er uendret. Hvis totalbildet for deler av utbetalingen er uendret, som uke 3 og 4 over,
-vil det ikke skje noe med denne perioden. Hvis totalbildet for hele saken er uendret, vil ikke dp-iverksett sende noe til utbetalingssystemet.
-3. Dersom det har vært utbetaling på saken tidligere, må dp-iverksett ha behandlingsid for den forrige behandlingen som ble iverksatt. Behandlingsid-en brukes til å hente ut
-det _forrige_ totalbildet av utbetalinger på saken, slik at dp-iverksett kan utlede om den nye behandlingen er utbetaling for en ny periode eller om det er en korrigering
+1. Ved en korrigering skal utsjekk alltid ha _ny gjeldende sannhet_, ikke differansen mellom ny og forrige utbetaling.
+2. utsjekk vil ikke agere på noe dersom totalbildet er uendret. Hvis totalbildet for deler av utbetalingen er uendret, som uke 3 og 4 over,
+vil det ikke skje noe med denne perioden. Hvis totalbildet for hele saken er uendret, vil ikke utsjekk sende noe til utbetalingssystemet.
+3. Dersom det har vært utbetaling på saken tidligere, må utsjekk ha behandlingsid for den forrige behandlingen som ble iverksatt. Behandlingsid-en brukes til å hente ut
+det _forrige_ totalbildet av utbetalinger på saken, slik at utsjekk kan utlede om den nye behandlingen er utbetaling for en ny periode eller om det er en korrigering
 (og i så fall hva som skal korrigeres).
 
-Merk også at korrigeringen av utbetalingen for uke 5-6 (B-6) er et opphør. Ved opphør av utbetaling forventer dp-iverksett at det ikke finnes noen utbetalinger
+Merk også at korrigeringen av utbetalingen for uke 5-6 (B-6) er et opphør. Ved opphør av utbetaling forventer utsjekk at det ikke finnes noen utbetalinger
 for perioden opphøret gjelder for. I dette eksempelet er altså alle utbetalingene for uke 5-6 fjernet fra listen. Dersom man vil iverksette et opphør av alle utbetalinger på saken,
-kan man sende en tom liste av utbetalinger til dp-iverksett.
+kan man sende en tom liste av utbetalinger til utsjekk.
 
 ### Periodisering av utbetalinger
 
@@ -228,24 +228,24 @@ Dersom disse utbetalingene hadde blitt slått sammen til én periode, vil vi ikk
 
 ### Tilgangskontroll og validering av vedtak
 
-Funksjonaliteten som tilbys i dp-iverksett er direkte koblet til penger som betales ut fra NAV til sluttbruker. Det kan ha store konsekvenser
-dersom vi betaler ut for mye penger eller penger til feil person. Derfor er vi nødt til å ha streng tilgangskontroll på vedtakene som dp-iverksett
+Funksjonaliteten som tilbys i utsjekk er direkte koblet til penger som betales ut fra NAV til sluttbruker. Det kan ha store konsekvenser
+dersom vi betaler ut for mye penger eller penger til feil person. Derfor er vi nødt til å ha streng tilgangskontroll på vedtakene som utsjekk
 tar i mot.
 
 Meldepliktsytelsene har gjerne en todelt flyt der det først fattes et vedtak om rett til ytelsen, og så danner meldekortene brukeren sender inn
 grunnlaget for hva som skal utbetales i en gitt periode. Meldekortene behandles stort sett fullautomatisk av vedtaksløsningen, mens vedtaket om
 rett kan behandles helt eller delvis manuelt.
 
-Dp-iverksett krever at konsumentene sender både vedtaket om rett og vedtakene for utbetaling som følger av meldekortene med riktig kontekst. Tjenesten vil validere
-at vedtak med saksbehandler-kontekst kommer fra en ansatt med beslutter-rolle for ytelsen. Videre har dp-iverksett oversikt over hvilken klient-applikasjon som
+utsjekk krever at konsumentene sender både vedtaket om rett og vedtakene for utbetaling som følger av meldekortene med riktig kontekst. Tjenesten vil validere
+at vedtak med saksbehandler-kontekst kommer fra en ansatt med beslutter-rolle for ytelsen. Videre har utsjekk oversikt over hvilken klient-applikasjon som
 har tilgang til å gjøre kall med ren system-kontekst for hver ytelse.
 
-Dersom dp-iverksett mottar en utbetaling som ikke kan spores tilbake til et vedtak om rett til ytelsen eller mottar en utbetaling fra en applikasjon
+Dersom utsjekk mottar en utbetaling som ikke kan spores tilbake til et vedtak om rett til ytelsen eller mottar en utbetaling fra en applikasjon
 som ikke har tilgang til å gjøre kall med system-kontekst, vil utbetalingen avvises.
 
-For vedtaket om rett til ytelsen trenger dp-iverksett å vite saksid, behandlingsid og sluttbrukeren vedtaket gjelder. Disse vedtakene kan sendes
+For vedtaket om rett til ytelsen trenger utsjekk å vite saksid, behandlingsid og sluttbrukeren vedtaket gjelder. Disse vedtakene kan sendes
 til det samme endepunktet som utbetalingene sendes til. I kontraktene finnes det en default-verdi for vedtaksdetaljer for slike vedtak. Informasjonen
-dp-iverksett krever er eksemplifisert under:
+utsjekk krever er eksemplifisert under:
 
 ```json
 {

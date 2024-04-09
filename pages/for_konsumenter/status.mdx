@@ -19,15 +19,15 @@ Status på utbetalinger er en av følgende verdier:
 ### GET /\{behandlingId\}/status
 
 Henter status på utbetaling. Dette endepunktet kan brukes for å sjekke tilstanden til en utbetaling som er tatt i mot og
-validert av dp-iverksett. NAVs økonomisystem har en asynkron integrasjon og er i tillegg et stormaskinsystem som har definerte
+validert av utsjekk. NAVs økonomisystem har en asynkron integrasjon og er i tillegg et stormaskinsystem som har definerte
 oppetider. Økonomisystemet er vanligvis stengt i helger, helligdager og mellom kl 21 og kl 6 på virkedager. Derfor kan det
 ta lang tid før en utbetaling blir kvittert ut fra økonomisystemet avhengig av når den er sendt inn.
 
-Dersom dp-iverksett finner behandlingen, vil endepunktet svare med `200 OK` og utbetalingsstatus.
+Dersom utsjekk finner behandlingen, vil endepunktet svare med `200 OK` og utbetalingsstatus.
 
 ## Med Kafka
 
-Vi har satt opp en topic hvor vi tilbyr statusendringer på utbetalinger: `teamdagpenger.iverksetting-status-v1`. Om dette
+Vi har satt opp en topic hvor vi tilbyr statusendringer på utbetalinger: `helved.iverksetting-status-v1`. Om dette
 er interessant for dere kan dere kontakte oss så vi får gitt appen deres tilgang til topicen. I tillegg må følgende finnes
 i nais-konfigen deres:
 
@@ -49,4 +49,4 @@ data class StatusEndretMelding(
 )
 ```
 
-Dataklassen finner du i [`dp-kontrakter`](https://github.com/navikt/dp-kontrakter) om du ønsker å bruke den direkte.
+Dataklassen finner du i [`utsjekk-kontrakter`](https://github.com/navikt/utsjekk-kontrakter) om du ønsker å bruke den direkte.

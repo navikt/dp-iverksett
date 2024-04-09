@@ -6,18 +6,18 @@ title: For konsumenter
 
 ## Oppsett
 
-For å ta i bruk dp-iverksett må klient-applikasjonen åpne for trafikk til tjenesten. Legg inn følgende kodesnutt i deres
+For å ta i bruk utsjekk må klient-applikasjonen åpne for trafikk til tjenesten. Legg inn følgende kodesnutt i deres
 nais-konfig:
 
 ```yaml
 accessPolicy:
   outbound:
     rules:
-      - application: dp-iverksett
-        namespace: teamdagpenger
+      - application: utsjekk
+        namespace: helved
 ```
 
-Tilsvarende må vi åpne for trafikk fra deres klient-applikasjon i dp-iverksett. Opprett en pull request i dp-iverksett med følgende kodesnutt i nais-konfig:
+Tilsvarende må vi åpne for trafikk fra deres klient-applikasjon i utsjekk. Opprett en pull request i utsjekk med følgende kodesnutt i nais-konfig:
 
 ```yaml
 accessPolicy:
@@ -28,13 +28,13 @@ accessPolicy:
 ```
 
 Merk at disse reglene legger opp til service-til-service-kommunikasjon innenfor samme kubernetes-cluster. Det vil si at
-klient-applikasjonen må bruke dp-iverksett sin service discovery-url. Bruk en av følgende URL-er:
+klient-applikasjonen må bruke utsjekk sin service discovery-url. Bruk en av følgende URL-er:
 ```
-http://dp-iverksett.teamdagpenger
-http://dp-iverksett.teamdagpenger.svc.cluster.local
+http://utsjekk.helved
+http://utsjekk.helved.svc.cluster.local
 ```
 
-Ta kontakt med oss dersom deres klient-applikasjon må bruke ingressen for å kommunisere med dp-iverksett.
+Ta kontakt med oss dersom deres klient-applikasjon må bruke ingressen for å kommunisere med utsjekk.
 
 ## Autentisering
 
@@ -43,7 +43,7 @@ Les mer om autentisering i [nais-dokumentasjonen](https://docs.nais.io/security/
 
 ## API-dokumentasjon og kontrakter for DTO-klasser
 
-dp-iverksett har swagger-dokumentasjon [her](https://dp-iverksett.intern.nav.no/swagger-ui/index.html).
+utsjekk har swagger-dokumentasjon [her](https://utsjekk.intern.nav.no/swagger-ui/index.html).
 
-Vi har samlet alle DTO-ene som brukes av API-et i et bibliotek. Se [dp-kontrakter på github](https://github.com/navikt/dp-kontrakter)
-og bruk pakken [iverksett](https://github.com/navikt/dp-kontrakter/packages/1868090).
+Vi har samlet alle DTO-ene som brukes av API-et i et bibliotek. Se [utsjekk-kontrakter på github](https://github.com/navikt/utsjekk-kontrakter)
+og bruk pakken [iverksett](https://github.com/navikt/utsjekk-kontrakter/packages/1868090).
