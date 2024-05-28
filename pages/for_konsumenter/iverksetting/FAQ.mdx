@@ -1,0 +1,53 @@
+---
+title: FAQ
+---
+
+# FAQ
+
+### Når må jeg dele opp utbetalingen i flere perioder?
+Dersom beløpet eller stønadstypen
+endrer seg eller brukeren har dager i perioden uten utbetaling (eksempelvis helg), må det opprettes ny periode.
+
+**Eksempler**
+<details>
+    <summary>Eksempel 1: Endring i beløp</summary>
+    Bruker skal ha utbetaling mandag-fredag med 500kr/dag tom onsdag og 400kr/dag fom torsdag. Det representeres med følgende utbetalingsperioder:
+    ```json5
+    [
+    {
+        "beløpPerDag": 500,
+        "fraOgMed": "2023-11-13",
+        "tilOgMed": "2023-11-15"
+    },
+    {
+        "beløpPerDag": 400,
+        "fraOgMed": "2023-11-16",
+        "tilOgMed": "2023-11-17"
+    }
+    ]
+    ```
+</details>
+
+<details>
+    <summary>Eksempel 2: Utbetaling med samme beløp for en 14-dagers periode</summary>
+    Bruker skal ha 500kr/dag for 14 dager, med unntak av helger. Det representeres med følgende utbetalingsperioder:
+    ```json
+    [
+    {
+        "beløpPerDag": 500,
+        "fraOgMed": "2023-11-13",
+        "tilOgMed": "2023-11-17"
+    },
+    {
+        "beløpPerDag": 500,
+        "fraOgMed": "2023-11-20",
+        "tilOgMed": "2023-11-24"
+    }
+    ]
+    ```
+</details>
+
+### Kan jeg sende total brutto utbetaling for hele meldepliktsperioden?
+Utsjekk _må_ ha beløp per dag for meldepliktsytelser uavhengig av hvordan vedtaksløsningen representerer utbetalingene
+internt. Dette kommer av føringer fra NAVs økonomisystem. Dersom din vedtaksløsning feks. representerer utbetalingen som et
+totalbeløp for en 14-dagers periode, må dere på konsumentsiden fordele dette totalbeløpet på dagsbeløp slik dere ser det hensiktsmessig.
