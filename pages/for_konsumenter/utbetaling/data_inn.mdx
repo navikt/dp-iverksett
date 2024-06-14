@@ -4,11 +4,128 @@ title: Data inn
 
 # Data inn
 
-## Eksempel på iverksetting av ny sak
+## Tilleggsstønader
 
+### Eksempel på iverksetting av ny sak
+Gitt en sak med id `S-1` og en førstegangsbehandling med id `B-1` med engangsutbetaling for mai og juni. Her er hvordan en iverksetting vil se ut:
 
-## Eksempel på iverksetting av revurdering (sak som allerede har utbetalinger)
+```json
+{
+    "sakId": "S-1",
+    "behandlingId": "B-1",
+    "iverksettingId": "485c17f5-2e11-49d2-b370-51120fec58d1",
+    "personident": "16418245135",
+    "vedtak": {
+        "vedtakstidspunkt": "2024-06-03T15:24:14",
+        "saksbehandlerId": "S123456",
+        "beslutterId": "B123456",
+        "utbetalinger": [
+            {
+                "beløp": "1500",
+                "satstype": "ENGANGS",
+                "fraOgMedDato": "2024-05-01",
+                "tilOgMedDato": "2024-05-31",
+                "stønadstype": "TILSYN_BARN_AAP"
+            },
+            {
+                "beløp": "1200",
+                "satstype": "ENGANGS",
+                "fraOgMedDato": "2024-06-01",
+                "tilOgMedDato": "2024-06-30",
+                "stønadstype": "TILSYN_BARN_AAP"
+            }
+        ]
+    }
+}
+```
 
+Her er det verdt å merke seg at `iverksettingId` ikke trenger å være en UUID. Det kan være en hvilken som helst `String` med vilkårlig lengde.
 
+### Eksempel på iverksetting av ny månedlig utbetaling
+Gitt samme sak `S-1` og samme behandling `B-1` som i forrige eksempel. Her er en iverksetting som viser ny utbetaling for juli:
+```json
+{
+    "sakId": "S-1",
+    "behandlingId": "B-1",
+    "iverksettingId": "e3c1bc3a-fcfe-4f93-819c-13e8c314ea35",
+    "personident": "16418245135",
+    "vedtak": {
+        "vedtakstidspunkt": "2024-07-01T15:24:14",
+        "saksbehandlerId": "S123456",
+        "beslutterId": "B123456",
+        "utbetalinger": [
+            {
+                "beløp": "1500",
+                "satstype": "ENGANGS",
+                "fraOgMedDato": "2024-05-01",
+                "tilOgMedDato": "2024-05-31",
+                "stønadstype": "TILSYN_BARN_AAP"
+            },
+            {
+                "beløp": "1200",
+                "satstype": "ENGANGS",
+                "fraOgMedDato": "2024-06-01",
+                "tilOgMedDato": "2024-06-30",
+                "stønadstype": "TILSYN_BARN_AAP"
+            },
+            {
+                "beløp": "1300",
+                "satstype": "ENGANGS",
+                "fraOgMedDato": "2024-07-01",
+                "tilOgMedDato": "2024-07-31",
+                "stønadstype": "TILSYN_BARN_AAP"
+            }
+        ]
+    },
+    "forrigeIverksetting": {
+        "behandlingId": "B-1",
+        "iverksettingId": "485c17f5-2e11-49d2-b370-51120fec58d1"
+    }
+}
+```
+(TODO legg inn lenke til avsnitt om gjeldende totalbilde av utbetalinger på iverksetting-siden)
+
+### Eksempel på iverksetting av revurdering
+Gitt samme sak `S-1` som i forrige eksempel. I en revurderingsbehandling `B-2` endres beløpet for mai. Her er hvordan iverksettingen vil se ut:
+```json
+{
+    "sakId": "S-1",
+    "behandlingId": "B-2",
+    "iverksettingId": "acb76a9f-2268-4e64-bdbe-b6cb413ac94f",
+    "personident": "16418245135",
+    "vedtak": {
+        "vedtakstidspunkt": "2024-07-11T15:24:14",
+        "saksbehandlerId": "S123456",
+        "beslutterId": "B123456",
+        "utbetalinger": [
+            {
+                "beløp": "2000",
+                "satstype": "ENGANGS",
+                "fraOgMedDato": "2024-05-01",
+                "tilOgMedDato": "2024-05-31",
+                "stønadstype": "TILSYN_BARN_AAP"
+            },
+            {
+                "beløp": "1200",
+                "satstype": "ENGANGS",
+                "fraOgMedDato": "2024-06-01",
+                "tilOgMedDato": "2024-06-30",
+                "stønadstype": "TILSYN_BARN_AAP"
+            },
+            {
+                "beløp": "1300",
+                "satstype": "ENGANGS",
+                "fraOgMedDato": "2024-07-01",
+                "tilOgMedDato": "2024-07-31",
+                "stønadstype": "TILSYN_BARN_AAP"
+            }
+        ]
+    },
+    "forrigeIverksetting": {
+        "behandlingId": "B-1",
+        "iverksettingId": "e3c1bc3a-fcfe-4f93-819c-13e8c314ea35"
+    }
+}
+```
 
 Todo: Hva dokumenteres i Swagger vs hva som dokumenteres her
