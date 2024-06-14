@@ -128,4 +128,128 @@ Gitt samme sak `S-1` som i forrige eksempel. I en revurderingsbehandling `B-2` e
 }
 ```
 
+## Meldepliktsytelser
+Eksemplene under er for dagpenger, men iverksetting for tiltakspenger vil se lik ut med to unntak: Feltene som sendes i `stønadsdata`-objektet vil være annerledes, og tiltakspenger må sette `brukersNavKontor` på vedtaket.
+
+### Eksempel på iverksetting av første meldekort/rapportering i ny sak
+Gitt sak med id `S-1` og behandling med id `B-1`. Her er et eksempel på iverksetting for første utbetaling:
+```json
+{
+    "sakId": "S-1",
+    "behandlingId": "B-1",
+    "personident": "29926096549",
+    "vedtak": {
+        "vedtakstidspunkt": "2024-06-14T08:24:14",
+        "saksbehandlerId": "Z999999",
+        "beslutterId": "Z888888",
+        "utbetalinger": [
+            {
+                "beløpPerDag": 600,
+                "fraOgMedDato": "2024-05-27",
+                "tilOgMedDato": "2024-05-31",
+                "stønadsdata": {
+                    "stønadstype": "DAGPENGER_ARBEIDSSØKER_ORDINÆR"
+                }
+            },
+            {
+                "beløpPerDag": 600,
+                "fraOgMedDato": "2024-06-03",
+                "tilOgMedDato": "2024-06-07",
+                "stønadsdata": {
+                    "stønadstype": "DAGPENGER_ARBEIDSSØKER_ORDINÆR"
+                }
+            }
+        ]
+    }
+}
+```
+
+### Eksempel på iverksetting av neste meldekort/rapportering
+Gitt samme sak `S-1` og ny behandling `B-2`. Her er et eksempel på iverksetting for andre meldekort/rapportering:
+```json
+{
+    "sakId": "S-1",
+    "behandlingId": "B-2",
+    "personident": "29926096549",
+    "vedtak": {
+        "vedtakstidspunkt": "2024-06-24T08:24:14",
+        "saksbehandlerId": "Z999999",
+        "beslutterId": "Z888888",
+        "utbetalinger": [
+            {
+                "beløpPerDag": 600,
+                "fraOgMedDato": "2024-05-27",
+                "tilOgMedDato": "2024-05-31",
+                "stønadsdata": {
+                    "stønadstype": "DAGPENGER_ARBEIDSSØKER_ORDINÆR"
+                }
+            },
+            {
+                "beløpPerDag": 600,
+                "fraOgMedDato": "2024-06-03",
+                "tilOgMedDato": "2024-06-07",
+                "stønadsdata": {
+                    "stønadstype": "DAGPENGER_ARBEIDSSØKER_ORDINÆR"
+                }
+            },
+            {
+                "beløpPerDag": 400,
+                "fraOgMedDato": "2024-06-10",
+                "tilOgMedDato": "2024-06-14",
+                "stønadsdata": {
+                    "stønadstype": "DAGPENGER_ARBEIDSSØKER_ORDINÆR"
+                }
+            },
+            {
+                "beløpPerDag": 400,
+                "fraOgMedDato": "2024-06-17",
+                "tilOgMedDato": "2024-06-21",
+                "stønadsdata": {
+                    "stønadstype": "DAGPENGER_ARBEIDSSØKER_ORDINÆR"
+                }
+            }
+        ]
+    },
+    "forrigeIverksetting": {
+        "behandlingId": "B-1"
+    }
+}
+```
+
+### Eksempel på iverksetting av revurdering med opphør
+Gitt samme sak `S-1`. I en revurderingsbehandling `B-3` skal utbetalingen for første meldekort/rapportering opphøre (feks. fordi bruker har jobbet over terskel). Her er hvordan iverksettingen vil se ut:
+```json
+{
+    "sakId": "S-1",
+    "behandlingId": "B-3",
+    "personident": "29926096549",
+    "vedtak": {
+        "vedtakstidspunkt": "2024-06-29T08:24:14",
+        "saksbehandlerId": "Z999999",
+        "beslutterId": "Z888888",
+        "utbetalinger": [
+            {
+                "beløpPerDag": 400,
+                "fraOgMedDato": "2024-06-10",
+                "tilOgMedDato": "2024-06-14",
+                "stønadsdata": {
+                    "stønadstype": "DAGPENGER_ARBEIDSSØKER_ORDINÆR"
+                }
+            },
+            {
+                "beløpPerDag": 400,
+                "fraOgMedDato": "2024-06-17",
+                "tilOgMedDato": "2024-06-21",
+                "stønadsdata": {
+                    "stønadstype": "DAGPENGER_ARBEIDSSØKER_ORDINÆR"
+                }
+            }
+        ]
+    },
+    "forrigeIverksetting": {
+        "behandlingId": "B-2"
+    }
+}
+```
+
 Todo: Hva dokumenteres i Swagger vs hva som dokumenteres her
