@@ -2,3 +2,21 @@
 title: Simulering
 ---
 
+# Simulering
+
+## Hva er simulering
+Simulering er en "dry run" mot Oppdragssytemet og viser hvordan resultatet av en iverksetting ville blitt.
+Simuleringen kan fortelle om iverksettingen vil være en ny utbetaling, en feilutbetaling eller en etterbetaling. I tillegg vil man få informasjon om
+iverksatte utbetalinger fra andre fagområder innenfor samme gruppe (Se [avsnitt om oppsett](#regler-for-arena-ytelsene)) – for Arena-ytelsene vil man
+eksempelvis kunne se om brukeren har utbetalinger i samme tidsrom fra Arena. Man vil også få informasjon om ulike typer trekk for utbetalingen,
+eksempelvis skattetrekk (TODO verifiser dette).
+
+Simuleringen er et øyeblikksbilde som hensyntar tilstanden i Oppdragssystemet i det tidspunktet man utfører simuleringen. Dersom man iverksetter utbetalingen
+en stund etter simuleringen, kan tilstanden ha endret seg og resultatet vil derfor kunne bli annerledes.
+
+## Hvorfor gjøre simulering
+Typisk gjøres simulering i en saksbehandlingskontekst, ofte for revurderingsbehandlinger. Saksbehandler kan da sjekke om resultatet av iverksettingen vil bli slik
+hen forventer, og om brukeren har evt. andre utbetalinger som vil kunne påvirke beregningen. I noen saksbehandlingsløsninger brukes også simulering for å forutsi og
+evt. varsle bruker om at revurderingen vil trigge en tilbakekrevingsbehandling.
+
+## Oppsett for Arena-ytelsene
