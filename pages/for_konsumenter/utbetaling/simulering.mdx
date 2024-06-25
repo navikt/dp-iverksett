@@ -9,8 +9,9 @@ Simulering er en "dry run" mot Oppdragssytemet og viser hvordan resultatet av en
 Simuleringen kan fortelle om iverksettingen vil være en ny utbetaling, en feilutbetaling eller en etterbetaling. I tillegg vil man få informasjon om
 iverksatte utbetalinger fra andre fagområder innenfor samme gruppe (Se [avsnitt om oppsett](#regler-for-arena-ytelsene)) – for Arena-ytelsene vil man
 eksempelvis kunne se om brukeren har utbetalinger i samme tidsrom fra Arena. Man vil også få informasjon om ulike typer trekk for utbetalingen,
-eksempelvis skattetrekk (TODO verifiser dette).
+eksempelvis skattetrekk (TODO verifiser om vi får tilbake noe om skattetrekk når vi simulerer dagpenger).
 
+### Øyeblikksbilde
 Simuleringen er et øyeblikksbilde som hensyntar tilstanden i Oppdragssystemet i det tidspunktet man utfører simuleringen. Dersom man iverksetter utbetalingen
 en stund etter simuleringen, kan tilstanden ha endret seg og resultatet vil derfor kunne bli annerledes.
 
@@ -19,4 +20,10 @@ Typisk gjøres simulering i en saksbehandlingskontekst, ofte for revurderingsbeh
 hen forventer, og om brukeren har evt. andre utbetalinger som vil kunne påvirke beregningen. I noen saksbehandlingsløsninger brukes også simulering for å forutsi og
 evt. varsle bruker om at revurderingen vil trigge en tilbakekrevingsbehandling.
 
+
 ## Oppsett for Arena-ytelsene
+
+## Todos
+- Beskrive åpningstid og hva det har å si for simulering. Ikke nødvendigvis et problem for saksbehandler.
+- Er det mulig å simulere ytelse i samme motregningsgruppe opp mot hverandre for å se hva som vil være mest gunstig fordeling for bruker (relevant f.eks dersom skattetrekk på en ytelse og ikke på en annen e.l)
+- Forklare faggruppe vs mottregningsgruppe? Motregningsgruppe er et subset av ytelser i en faggruppe, men som kan motregnes mot hverandre. Når man simulerer inneholder responsen informasjon om ytelser i samme faggruppe. Eksempel på faggruppe er arbeidsytelser (ARBYT) a.k.a Arena-ytelser.
