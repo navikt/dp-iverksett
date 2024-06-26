@@ -1,7 +1,3 @@
----
-title: Simulering
----
-
 # Simulering
 
 ## Hva er simulering
@@ -9,7 +5,7 @@ Simulering er en "dry run" mot Oppdragssytemet og viser hvordan resultatet av en
 Simuleringen kan fortelle om iverksettingen vil være en ny utbetaling, en feilutbetaling eller en etterbetaling. I tillegg vil man få informasjon om
 iverksatte utbetalinger fra andre fagområder innenfor samme gruppe (Se [avsnitt om oppsett](#regler-for-arena-ytelsene)) – for Arena-ytelsene vil man
 eksempelvis kunne se om brukeren har utbetalinger i samme tidsrom fra Arena. Man vil også få informasjon om ulike typer trekk for utbetalingen,
-eksempelvis skattetrekk (TODO verifiser om vi får tilbake noe om skattetrekk når vi simulerer dagpenger).
+eksempelvis skattetrekk.
 
 ### Øyeblikksbilde
 Simuleringen er et øyeblikksbilde som hensyntar tilstanden i Oppdragssystemet i det tidspunktet man utfører simuleringen. Dersom man iverksetter utbetalingen
@@ -20,10 +16,46 @@ Typisk gjøres simulering i en saksbehandlingskontekst, ofte for revurderingsbeh
 hen forventer, og om brukeren har evt. andre utbetalinger som vil kunne påvirke beregningen. I noen saksbehandlingsløsninger brukes også simulering for å forutsi og
 evt. varsle bruker om at revurderingen vil trigge en tilbakekrevingsbehandling.
 
-
 ## Oppsett for Arena-ytelsene
+- Forklare faggruppe vs mottregningsgruppe? Motregningsgruppe er et subset av ytelser i en faggruppe, men som kan motregnes mot hverandre. Når man simulerer inneholder responsen informasjon om ytelser i samme faggruppe. Eksempel på faggruppe er arbeidsytelser (ARBYT) a.k.a Arena-ytelser.
 
 ## Todos
 - Beskrive åpningstid og hva det har å si for simulering. Ikke nødvendigvis et problem for saksbehandler.
 - Er det mulig å simulere ytelse i samme motregningsgruppe opp mot hverandre for å se hva som vil være mest gunstig fordeling for bruker (relevant f.eks dersom skattetrekk på en ytelse og ikke på en annen e.l)
-- Forklare faggruppe vs mottregningsgruppe? Motregningsgruppe er et subset av ytelser i en faggruppe, men som kan motregnes mot hverandre. Når man simulerer inneholder responsen informasjon om ytelser i samme faggruppe. Eksempel på faggruppe er arbeidsytelser (ARBYT) a.k.a Arena-ytelser.
+
+## Eksempler
+
+Tabellen under viser tre behandlinger for perioden februar t.o.m. april
+
+| Behandlinger | Februar | Mars | April |
+|:-------------|:-------:|:----:|------:|
+| 18/5         |  1000   | 1000 |  1000 |
+| 22/5         |         | 800  |       |
+| 23/5         |  1100   | 1100 |  1100 |
+
+Første behandling sendes inn 18/5 og er på 1000 kr pr måned. Oppsummeringen fra simuleringstjenesten blir seendes slik ut:
+
+| Oppsummering        | Februar | Mars | April |
+|:--------------------|:-------:|:----:|------:|
+| tidligereUtbetalt   |    0    |  0   |     0 |
+| nyUtbetaling        |  1000   | 1000 |  1000 |
+| totalEtterbetaling  |    0    |  0   |     0 |
+| totalFeilutbetaling |    0    |  0   |     0 |
+
+Andre behandling sendes inn 22/5. Der revurderer man mars og sier at bruker skal få utbetalt 800 kr, ikke 1000 kr som det opprinnelig var:
+
+| Oppsummering        | Februar | Mars | April |
+|:--------------------|:-------:|:----:|------:|
+| tidligereUtbetalt   |  1000   | 1000 |  1000 |
+| nyUtbetaling        |    0    | 800  |     0 |
+| totalEtterbetaling  |    0    |  0   |     0 |
+| totalFeilutbetaling |    0    | 200  |     0 |
+
+Andre behandling sendes inn 23/5. Der revurderer man alle periodene til 1100 kr pr. måned:
+
+| Oppsummering        | Februar | Mars | April |
+|:--------------------|:-------:|:----:|------:|
+| tidligereUtbetalt   |  1000   | 800  |  1000 |
+| nyUtbetaling        |  1100   | 1100 |  1100 |
+| totalEtterbetaling  |   100   | 300  |   100 |
+| totalFeilutbetaling |    0    |  0   |     0 |
